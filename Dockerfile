@@ -7,15 +7,13 @@ RUN go mod download
 
 COPY . ./
 
-RUN CGO_ENABLED=0 GOOS=linux APP_ENV=prod go build -o /expense-tracker ./cmd/expense-tracker/main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -o /expense-tracker ./cmd/expense-tracker/main.go
 
 FROM gcr.io/distroless/base-debian11 AS build-release-stage
 
 WORKDIR /
 
 COPY --from=build-stage /expense-tracker /expense-tracker
-ENV APP_ENV=prod
-ENV PORT=8080
 
 USER nonroot:nonroot
 
