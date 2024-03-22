@@ -63,4 +63,4 @@ jobs:
           # NOTE: If using a pre-built image, update the image name here
           image: ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}
           env_vars: |
-            APP_ENV=prod
+            APP_ENV=${{ secrets.ENV }}
