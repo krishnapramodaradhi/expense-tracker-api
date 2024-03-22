@@ -6,11 +6,11 @@ on:
       - main
 
 env:
-  PROJECT_ID: penny-wise-418014 # TODO: update Google Cloud project id
-  GAR_LOCATION: asia-south1 # TODO: update Artifact Registry location
-  REPOSITORY: penny-wise # TODO: update Artifact Registry repository name
-  SERVICE: expense-tracker-api # TODO: update Cloud Run service name
-  REGION: asia-south1 # TODO: update Cloud Run service region
+  PROJECT_ID: penny-wise-418014
+  GAR_LOCATION: asia-south1
+  REPOSITORY: penny-wise
+  SERVICE: expense-tracker-api
+  REGION: asia-south1
 
 jobs:
   deploy:
@@ -64,6 +64,3 @@ jobs:
           image: ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}
           env_vars: |
             APP_ENV=prod
-
-      - name: Show Deployed Url
-        run: echo ${{ steps.deploy.outputs.url }}
