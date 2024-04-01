@@ -29,9 +29,10 @@ func (s *Server) Run() {
 	expenseHandler := handler.NewExpenseHandler(s.db)
 
 	v1.HandleFunc("/auth/signup", util.Make(authHandler.Signup))
+	v1.HandleFunc("/auth/login", util.Make(authHandler.Login))
 
 	v1Protected := v1.PathPrefix("").Subrouter()
-	v1Protected.Use(middleware.TokenValidation)
+	v1Protected.Use(middleware.TokenValidation(s.db))
 	v1Protected.HandleFunc("/savings", util.Make(savingHandler.CreateSavings)).Methods(http.MethodPost)
 
 	v1Protected.HandleFunc("/expenses", util.Make(expenseHandler.CreateExpenses)).Methods(http.MethodPost)
