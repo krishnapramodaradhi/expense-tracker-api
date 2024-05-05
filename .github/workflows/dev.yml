@@ -1,4 +1,4 @@
-name: Build and Deploy Pennywise
+name: Dev Deployment
 
 on:
   push:
